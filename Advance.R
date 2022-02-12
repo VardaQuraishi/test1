@@ -1,0 +1,63 @@
+my_age <- 12
+your_age <- 14
+sum(my_age, your_age)
+plot(cars)
+hist(cars$speed)
+attach(cars)
+hist(dist)
+summary(cars)
+summary(cars$speed)
+class(cars)
+class(cars$speed)
+length(cars$speed)
+unique(cars$speed)
+head(cars)
+tail(cars)
+cars[3:6, 1:2]
+?median
+median(cars$dist)
+new_data <- c(2,4,6,3,NA,9)
+median(new_data, na.rm = TRUE)
+
+library(tidyverse)
+data()
+?starwars
+dim(starwars)
+str(starwars)
+glimpse(starwars)
+View(starwars)
+head(starwars)
+tail(starwars)
+
+attach(starwars)
+names(starwars)
+length(starwars)
+class(hair_color)
+length(hair_color)
+unique(hair_color)
+View(sort(table(hair_color), decreasing = TRUE))
+barplot(sort(table(eye_color), decreasing = TRUE))
+
+library(tidyverse)
+data()
+View(starwars)
+
+glimpse(starwars)
+
+#Find missing data
+starwars %>% 
+  select(name, gender, hair_color, height) %>% 
+  filter(!complete.cases(.))
+
+#dropping NA values
+starwars %>% 
+  select(name, gender, hair_color, height) %>% 
+  drop_na(height,gender)
+
+#replacing NA values
+starwars %>% 
+  select(name, gender, hair_color, height) %>% 
+  filter(!complete.cases(.)) %>% 
+  mutate(hair_color = replace_na(hair_color = "none"))
+
+
