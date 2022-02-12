@@ -48,6 +48,13 @@ str(my_data)
 
 #rename and re ordering columns
 sw <- starwars %>% 
-  select(name, mass, height) %>% 
-  rename(weight = mass)
-  
+  select(name, mass, height, gender) %>% 
+  rename(weight = mass) %>% 
+  na.omit()#creating new data from original
+  mutate(height = height / 100) %>% 
+    filter(gender %in% c("male", "female")) %>% 
+    mutate(gender = recode(gender,
+                           male = "m",
+                           female = "f")) %>% 
+    mutate(size = height > 1 & weight > 75,
+           size = if_else(size == TRUE, "big", "small"))
