@@ -60,4 +60,25 @@ starwars %>%
   filter(!complete.cases(.)) %>% 
   mutate(hair_color = replace_na(hair_color = "none"))
 
+install.packages("gapminder")
+library(gapminder)
+
+View(gapminder)
+data <- select(gapminder, country, year, lifeExp)
+View(data)
+
+#long to wide conversion
+wide_data <- data %>% 
+  pivot_wider(name_from = year, values_from = lifeExp)
+  #year are columns
+View(wide_data)
+
+# wide to long conversion
+long_data <- wide_data %>% 
+  pivot_longer(2:13, #from column 2 to 13
+               names_to = "year",
+               value_to = "lifeExp"
+               )
+
+
 
