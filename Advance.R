@@ -79,6 +79,21 @@ long_data <- wide_data %>%
                names_to = "year",
                value_to = "lifeExp"
                )
+install.packages("MASS")
+library(MASS)
+attach(Cars93)
 
+table(Origin)
+table(AirBags, Origin) #Airbags for rows origin for column
+addmargins(table(AirBags, Origin)) #Summing both columns and rows
+addmargins(table(AirBags, Origin),1) #summing only columns
+addmargins(table(AirBags, Origin),2) # summing only rows
+prop.table(table(AirBags, Origin),1) *100 #proportion of airbags in a certain origin
 
-
+library(tidyverse)
+Cars93 %>% 
+  group_by(Origin, AirBags) %>% 
+  summarise(number = n()) %>% #n number of airbags in an orgin
+  pivot_wider(names_from = "Origin",
+              values_from = "number")
+  
